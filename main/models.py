@@ -5,7 +5,7 @@ from django.db import models
 class Book(models.Model):
     title = models.CharField(max_length=65)
     author = models.CharField(max_length=65)
-    release_data = models.DateField()
+    release_date = models.DateTimeField()
     pages = models.IntegerField()
 
     def __str__(self):
