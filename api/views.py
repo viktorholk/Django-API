@@ -13,4 +13,4 @@ class ExampleView(APIView):
             'user': request.user,  # `django.contrib.auth.User` instance.
             'auth': request.auth,  # None
         }
-        return Response(content)
+        return JsonResponse(content)
