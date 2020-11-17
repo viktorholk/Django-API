@@ -20,43 +20,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'secretdjangokey'
+SECRET_KEY = 'h)uos1@7_jpknr!71==ey=(jnof_4quw$+ge&0gg7%bug$l99g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'api.Node'
 
-AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend",
-)
 # Application definition
 
 INSTALLED_APPS = [
-    'api',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'rest_framework',
-    'rest_framework.authtoken',
 ]
-
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'
-    ]
-    
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,12 +75,8 @@ WSGI_APPLICATION = 'django_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'testdb',
-        'USER': 'testuser',
-        'PASSWORD': 'uBRwqZ3me0yHRCCj',
-        'HOST': 'mysql.tactoctical.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
