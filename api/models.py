@@ -3,7 +3,7 @@ from django.contrib.auth.models import ( BaseUserManager, AbstractBaseUser )
 # Create your models here.
 
 
-class NodeUserManager(BaseUserManager):
+class NodeManager(BaseUserManager):
     def create_user(self, node, password=None):
         if not node:
                 raise ValueError('Users must have an node name')
@@ -21,20 +21,18 @@ class NodeUserManager(BaseUserManager):
             node
         )
         user.is_admin = True
-        user.is_superuser = True
         user.save(using=self._db)
         return user
 
 
-class NodeUser(AbstractBaseUser):
-    node = models.CharField(max_length=45, unique=True, null=False)
+class Node(AbstractBaseUser):
+    node = models.CharField(max_length=45, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
 
-    objects = NodeUserManager()
+    objects = NodeManager()
 
     USERNAME_FIELD  = 'node'
     REQUIRED_FIELDS = []

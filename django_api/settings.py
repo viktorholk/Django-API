@@ -27,14 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'api.NodeUser'
+AUTH_USER_MODEL = 'api.Node'
 
 AUTHENTICATION_BACKENDS = (
-    # Needed to login by custom User model, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    "allauth.account.auth_backends.AuthenticationBackend",
 )
 # Application definition
 
@@ -47,13 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
 
     'rest_framework',
     'rest_framework.authtoken',
-    'allauth',
 ]
-SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (

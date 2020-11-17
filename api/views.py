@@ -5,6 +5,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 class ExampleView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -14,3 +15,8 @@ class ExampleView(APIView):
             'auth': request.auth,  # None
         }
         return JsonResponse(content)
+
+class Authenticate(APIView):
+
+    def get(self, request):
+        pass
