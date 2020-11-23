@@ -38,7 +38,8 @@ class GetToken(APIView):
             return HttpResponse('error')
 
 
-class ObtainExpiringAuthToken(ObtainAuthToken):
+
+class ObtainExpiringAuthToken(APIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -52,4 +53,16 @@ class ObtainExpiringAuthToken(ObtainAuthToken):
             return Response({'token': token.key})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-obtain_expiring_auth_token = ObtainExpiringAuthToken.as_view()
+    def post(self, request):
+        if 'username' in request.POST and 'password' in request.POST:
+            username    = request.POST['username']
+            password    = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                token, created = Token.objects.get_or_create(user=user)
+
+                if not created:
+                    token.created = datetime.utcnow()
+                    token.save()
+                return Response({'token': token.key})
+            return HttpResponse('error')
