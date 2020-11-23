@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 # from .models import UserManager
 # Create your views here.
@@ -21,12 +23,14 @@ class Login(APIView):
             return HttpResponse(authenticate(username=username, password=password))
         return HttpResponse('Username and password field must be provided')
 
-class Register(APIView):
+class GetToken(APIView):
     def post(self, request):
         if 'username' in request.POST and 'password' in request.POST:
             username    = request.POST['username']
             password    = request.POST['password']
-            UserManager.create_user(username, password)
-            return HttpResponse('User created')
-        else:
-            return HttpResponse('Username and password field must be provided')
+            user = authenticate(username=username, password=password)
+            if user:
+                token = Token.objects.get_or_create(user=user)
+                print(token[0])
+                return HttpResponse()
+            return HttpResponse('error')
