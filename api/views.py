@@ -25,34 +25,7 @@ class Login(APIView):
             return HttpResponse(authenticate(username=username, password=password))
         return HttpResponse('Username and password field must be provided')
 
-class GetToken(APIView):
-    def post(self, request):
-        if 'username' in request.POST and 'password' in request.POST:
-            username    = request.POST['username']
-            password    = request.POST['password']
-            user = authenticate(username=username, password=password)
-            if user:
-                token = Token.objects.get_or_create(user=user)
-                print(token[0])
-                return HttpResponse()
-            return HttpResponse('error')
-
-
-
 class ObtainExpiringAuthToken(APIView):
-    def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            token, created =  Token.objects.get_or_create(user=serializer.validated_data['user'])
-
-            if not created:
-                # update the created time of the token to keep it valid
-                token.created = datetime.datetime.utcnow()
-                token.save()
-
-            return Response({'token': token.key})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     def post(self, request):
         if 'username' in request.POST and 'password' in request.POST:
             username    = request.POST['username']
