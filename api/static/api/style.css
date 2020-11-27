@@ -1,0 +1,162 @@
+/* Main */
+body{
+    background-color: #121212 !important;
+}
+
+.container{
+    font-family: 'Bitter', serif;
+    text-align: center;
+}
+
+#page{
+    animation: enter 0.7s forwards;
+}
+@keyframes enter{
+    0% {clip-path: circle(0% at 50% 50%);}
+    100% {clip-path: circle(100% at 50% 50%);}
+}
+.row{
+    margin: 1em;
+}
+h1{
+    font-weight: bold !important;
+    cursor: default;
+}
+/* Navbar */
+#myNavbar{
+    margin: 0 auto;
+    margin-top: 2em;
+    text-align: center;
+    font-family: 'Bitter', serif;
+    font-weight: bold;
+    animation: navbar forwards 1s;
+}
+
+#myNavbar .items a{
+    display: inline-block;
+    margin: 0.3em;
+    text-decoration: none !important;
+    color: #ffffff !important;
+}
+#myNavbar .items a{
+    font-size: 1.7em;
+    transition: 250ms;
+}
+#myNavbar .items a:hover{
+    transform: scale(1.05);
+}
+#myNavbar .items a::after{
+    display:block;
+    content: '';
+    border-bottom: solid 2px #ff313f;  
+    transform: scaleX(0);  
+    transition: transform 150ms ease-in-out;
+}
+#myNavbar .items a:hover:after{
+    transform: scaleX(1); 
+}
+#myNavbar a img{
+    width: 50%;
+    transition: 250ms;
+}
+#myNavbar a img:hover{
+    transform: scale(1.015);
+}
+/* Enter-Transition */
+
+
+
+/* Content */
+.content{
+    margin-top: 2em;
+    animation: content forwards 1s;
+}
+.content p {
+    padding: 0.5em;
+}
+.content span{
+    border-bottom: solid 1px #ff313f ;  
+}
+.content .item{
+    background-color: white;
+    width: 22em;
+    height: 22em;
+    overflow: hidden;
+    margin-right: 0;
+    margin-left: 0;
+}
+.content .item h1{
+    font-size: 2em;
+}
+.content .item img{
+    width: 100%;
+    transition:  transform .2s ease-in-out;
+}
+.content .item img:hover{
+    transform:  translate3d(0em, -22em, 0em);
+}
+.content .item a{
+    text-decoration: none;
+    color: #ff313f;
+}
+
+.content .item .info{
+    margin: 0.25em;
+}
+.content .item .info h2, a{
+    font-size: 1em;
+}
+.content .item .info a{
+    margin-left: 1em;
+
+}
+
+.content .links{
+    display: inline-block;
+    text-decoration: none;
+}
+.content .links a{
+    text-decoration: none;
+}
+
+.links svg{
+    width: 2em;
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    transition: 250ms;
+    fill: white;
+    
+}
+.links svg:hover{
+    fill: #ff313f;
+    transform: scale(1.05);
+}
+
+#footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #ffffff;
+    cursor: default;;
+    animation: footer 5s forwards;
+}
+
+/* Animations */
+@keyframes navbar{
+    from{opacity: 0; transform: translateY(1em);}
+    to{}
+}
+@keyframes content{
+    from{opacity: 0; transform: scale(0.80);}
+    to{}
+}
+@keyframes footer{
+    from{opacity: 0;}
+    to{}
+}
+
+.hidden-div{
+    display: none;
+}
