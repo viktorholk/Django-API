@@ -9,6 +9,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
+from .serializer import SnippetSerializer
 # from .models import UserManager
 # Create your views here.
 from . import urls
@@ -61,3 +62,20 @@ class ObtainExpiringAuthToken(APIView):
                     token.save()
                 return Response({'token': token.key})
             return HttpResponse('error')
+
+
+# Working with serializers
+@csrf_exempt
+def snippet_list(request):
+    if request.method == 'GET':
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = SnippetSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
